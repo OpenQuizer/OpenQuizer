@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return 'Hello, this is willywangkaa first Heroku project!'
+    return 'Hello, this is willywangkaa first Heroku project! Autobuildtest'
 
 @app.route('/test')
 def test():
