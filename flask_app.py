@@ -19,7 +19,7 @@ def package():
 
 @app.route('/page')
 def htmlpage():
-    with open('main_page.html', 'r') as f:
+    with open('./views/main_page.html', 'r') as f:
         contents = f.read()
     return contents
 
