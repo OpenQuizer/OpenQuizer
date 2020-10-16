@@ -43,9 +43,6 @@ def handle_message(event):
 
 
 
-
-
-
 @app.route('/')
 def main():
     return 'Hello, this is willywangkaa first Heroku project! Autobuildtest'
