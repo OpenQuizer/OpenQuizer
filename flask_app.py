@@ -1,6 +1,5 @@
-import math
-from func import proc
 from flask import Flask, request
+from src.database_util import Database
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
@@ -39,20 +38,11 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text="MJ is god damn awesome"))
 
-
-@app.route('/')
-def main():
-    return 'Hello, this is willywangkaa first Heroku project! Autobuildtest'
-
 @app.route('/test')
 def test():
     with open('./src/views/responsiveTest.html', 'r') as f:
         contents = f.read()
     return contents
-
-@app.route('/package')
-def package():
-    return str(math.pi)
 
 @app.route('/page')
 def htmlpage():
@@ -60,9 +50,16 @@ def htmlpage():
         contents = f.read()
     return contents
 
-@app.route('/coop')
-def coop():
-    return proc()
+@app.route('/db_insert', methods=['GET'])
+def index():
+    title = request.args.get('title')
+    db = Database()
+    aid = db.insert_article(title)
+    return str(db.get_article_by_id(aid))
+
+@app.route('/')
+def main():
+    return 'OpenQuizer server'
 
 if __name__ == "__main__":
     app.run()
