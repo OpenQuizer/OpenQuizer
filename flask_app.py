@@ -15,7 +15,6 @@ CHANNEL_SECRET = 'b304f3ce9c97b39885f9439032ed3f51'
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
-
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -34,13 +33,11 @@ def callback():
 
     return 'OK'
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="MJ is god damn awesome"))
-
 
 
 @app.route('/')
@@ -49,7 +46,9 @@ def main():
 
 @app.route('/test')
 def test():
-    return 'test 12 12'
+    with open('./src/views/responsiveTest.html', 'r') as f:
+        contents = f.read()
+    return contents
 
 @app.route('/package')
 def package():
